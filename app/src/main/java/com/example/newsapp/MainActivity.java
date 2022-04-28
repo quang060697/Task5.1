@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements StoryAdapter.OnColumnClickListener,NewsAdapter.OnColumnClickListener{
+public class MainActivity extends AppCompatActivity implements StoryAdapter.OnColumnClickListener,NewsAdapter.OnColumnClickListener,RelatedNewsAdapter.OnColumnClickListener {
     Integer[] storyImageList = {R.drawable.waiting, R.drawable.teaching,R.drawable.smoke};
     Integer[] newsImageList = {R.drawable.dog, R.drawable.house,R.drawable.mcdonald,R.drawable.colse};
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.OnCo
     String title2 = "Some states raise teacher pay amid pandemic shortage, but can they retain the educators?";
     String detail2 = "“We can’t afford rent or our mortgage and the price of gasoline and food,” a middle school art teacher in Santa Fe, New Mexico, said."+ "\n"
             +"Jamie Torres spent the first three years of her teaching career “practically being homeless.” Her starting salary of $38,000 in 2018 wasn’t enough to afford rent in the neighborhoods near where she taught in Sante Fe, New Mexico, so she bunked with family members for months at a time or stayed with friends.";
+
     String title3 = "Nebraska wildfires kill ex-fire chief, hurt 15 firefighters";
     String detail3 = "Blazes have been reported in 14 counties around the state, authorities said."+"\n" +
             "CAMBRIDGE, Neb. — Wind-driven wildfires sweeping through parts of Nebraska killed a retired fire chief and injured at least 15 firefighters, authorities said Sunday.";
@@ -139,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.OnCo
         FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView,fragment2 )
                 .commit();
+    }
+    @Override
+    public void onItemClick3(int position) {
+
     }
 }
 

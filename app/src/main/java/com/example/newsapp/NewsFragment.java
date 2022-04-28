@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +42,7 @@ public class NewsFragment extends Fragment implements RelatedNewsAdapter.OnColum
     private ImageView img;
     private TextView fragmentTitleTextView,fragmentBodyTextView;
     Integer[] newsImageList = {R.drawable.teaching, R.drawable.smoke,R.drawable.mcdonald,R.drawable.house};
+
     String title1 = "Some states raise teacher pay amid pandemic shortage, but can they retain the educators?";
     String title2 = "Nebraska wildfires kill ex-fire chief, hurt 15 firefighters";
     String title3 = "Family finds preserved McDonald’s french fries from over 60 years ago";
@@ -45,7 +51,22 @@ public class NewsFragment extends Fragment implements RelatedNewsAdapter.OnColum
     List<News> newsList = new ArrayList<>();
     String[] publisherList = {"9NEWS","7NEWS","ABC NEWS","THE AGE"};
     String[] newsTitleList = {title1,title2,title3,title4};
+    String newsDetail1 = "“We can’t afford rent or our mortgage and the price of gasoline and food,” a middle school art teacher in Santa Fe, New Mexico, said."+ "\n"
+            +"Jamie Torres spent the first three years of her teaching career “practically being homeless.” Her starting salary of $38,000 in 2018 wasn’t enough to afford rent in the neighborhoods near where she taught in Sante Fe, New Mexico, so she bunked with family members for months at a time or stayed with friends.";
 
+    String newsDetail2 = "Blazes have been reported in 14 counties around the state, authorities said."+"\n" +
+            "CAMBRIDGE, Neb. — Wind-driven wildfires sweeping through parts of Nebraska killed a retired fire chief and injured at least 15 firefighters, authorities said Sunday.";
+
+    String newsDetail3 = "A US family who were renovating their home have unearthed a bag of McDonald’s french fries that had apparently been sitting inside a wall for more than 60 years.\n" +
+            "\n" +
+            "Rob and Grace Jones were fixing up their kitchen and bathroom on April 16 in Crystal Lake, which is about 75km northwest of downtown Chicago, when they made the fast-food discovery.";
+    String newsDetail4 = "Melbourne’s pandemic property boom has come to an end, as new figures show house prices fell for the first time since the June quarter of 2020 amid jitters over rising interest rates.\n" +
+            "\n" +
+            "Melbourne house prices fell 0.7 per cent to a median $1.092 million in the March quarter, the latest Domain House Price Report, released on Thursday, shows. Unit prices shed 2.2 per cent to a median of $578,775 over the quarter, their steepest fall since 2017.";
+    String[] newsDetailList = {newsDetail1,newsDetail2,newsDetail3,newsDetail4};
+
+    Context context;
+    Integer position;
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -86,6 +107,8 @@ public class NewsFragment extends Fragment implements RelatedNewsAdapter.OnColum
     }
     public void updateContent(int imageID, String title, String body, Context context,Integer position )
     {
+         this.context = context;
+         this.position = position;
          img = getView().findViewById(R.id.imageView);
          img.setImageResource(imageID);
          fragmentTitleTextView = getView().findViewById(R.id.fragmentTitleTextView);
@@ -106,7 +129,20 @@ public class NewsFragment extends Fragment implements RelatedNewsAdapter.OnColum
 
     @Override
     public void onItemClick3(int position) {
+        Random rn = new Random();
 
+        int a = rn.nextInt(4) ;
+        FragmentManager fragmentManager2 = getParentFragmentManager();
+        NewsFragment fragment3 = (NewsFragment)getParentFragmentManager().
+                findFragmentById(R.id.fragmentContainerView);
+        fragment3.updateContent(newsImageList[this.position],newsTitleList[this.position],newsDetailList[this.position],this.context, a);
+        Collections.reverse(Arrays.asList(newsList));
+
+
+
+        FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerView,fragment3 )
+                .commit();
     }
 
 }
