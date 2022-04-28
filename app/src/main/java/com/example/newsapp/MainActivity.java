@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements StoryAdapter.OnColumnClickListener,NewsAdapter.OnColumnClickListener,RelatedNewsAdapter.OnColumnClickListener {
+public class MainActivity extends AppCompatActivity implements StoryAdapter.OnColumnClickListener,NewsAdapter.OnColumnClickListener{
     Integer[] storyImageList = {R.drawable.waiting, R.drawable.teaching,R.drawable.smoke};
     Integer[] newsImageList = {R.drawable.dog, R.drawable.house,R.drawable.mcdonald,R.drawable.colse};
 
@@ -141,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.OnCo
         fragmentTransaction.replace(R.id.fragmentContainerView,fragment2 )
                 .commit();
     }
-    @Override
-    public void onItemClick3(int position) {
 
-    }
 }
 
